@@ -9,15 +9,15 @@
 <body>
     
 <?php
-$fullname = 'safwen djebbi';
-echo 'Bonjour ' . $fullname . ' et bienvenue sur le site !'; // OK
-?>
-<?php
- $number = 5;
- $res = $number *10;
- $sus = $number % 10;
- echo $res;
- echo $sus
+  $isEnabel = true;
+  $isOwner = false;
+  $isAdmin = true;
+  if(($isEnabel && $isOwner) || $isAdmin){
+      echo 'access a le recette validée';
+  }
+  else {
+      echo 'access a le recette non validée'  ;
+  }
 
 ?>
 </body>
