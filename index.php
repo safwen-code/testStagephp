@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo('hi <span>safwen</span>') ?>
+    <?php echo 'hi <span>safwen</span>'; ?>
+    <!-- /* initialiser le premier test d'erreur */ -->
+    <?php phpinfo(); ?>
 </body>
 </html>
