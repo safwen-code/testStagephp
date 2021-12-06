@@ -7,8 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo 'hi <span>safwen</span>'; ?>
-    <!-- /* initialiser le premier test d'erreur */ -->
-    <?php phpinfo(); ?>
+    
+<?php
+$fullname = 'safwen djebbi';
+echo 'Bonjour ' . $fullname . ' et bienvenue sur le site !'; // OK
+?>
+<?php
+ $number = 5;
+ $res = $number *10;
+ $sus = $number % 10;
+ echo $res;
+ echo $sus
+
+?>
 </body>
 </html>
