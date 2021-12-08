@@ -12,11 +12,23 @@
 </head>
 <body>
 <!-- $_GET  va contenir les données envoyées -->
+<!-- isset() teste si une variable existe. -->
+<!-- ontrôler si l'e-mail passé est bien valide, à l'aide de la fonction filter_var 
+et vérifier que le message n'est pas vide, à l'aide de la fonction empty. -->
     <div class="card">
          <div class="card-body">
            <div class="card-titel">
-                <h6>email</h6> <?php echo $_GET['email']; ?>
-                <h6>message</h6><?php echo $_GET['message']; ?>
+               <?php if (
+                   !isset($_GET['email']) ||
+                   !filter_var($_GET['email'], FILTER_VALIDATE_EMAIL) ||
+                   (!isset($_GET['message']) && !empty($_GET['message']))
+               ) {
+                   echo 'email & message no found';
+               } else {
+                   echo $_GET['email'] . '</br>';
+                   echo $_GET['message'];
+               } ?>
+
            </div>
          </div>
     </div>
