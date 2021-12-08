@@ -15,7 +15,7 @@
     echo $length . '</br>';
     ?>
 
-     <!-- count => give me the nbr ele in tab -->
+    <!-- count => give me the nbr ele in tab -->
      <?php
      $tab = [
          'titel' => 'test count',
@@ -25,10 +25,10 @@
      echo $test . '</br>';
      ?>
 
-     <!-- replace a string with another string -->
+    <!-- replace a string with another string -->
       <?php echo str_replace('c', 'C', 'le cass c est très bon'); ?>
       
-      <!-- formate text =>sprintf -->
+    <!-- formate text =>sprintf -->
         <?php
         $recipe = [
             'titel' => 'salade',
@@ -42,7 +42,7 @@
             $recipe['descr']
         ) . '</br>';
         ?>
-        <!-- play with date -->
+    <!-- play with date -->
         <?php
         $year = date('Y');
         $month = date('m');
@@ -55,5 +55,9 @@
         $minut = date('i');
         echo sprintf('%s : %s', $hour, $minut);
         ?>
+
+
+
+
 </body>
 </html>

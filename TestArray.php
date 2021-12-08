@@ -31,7 +31,7 @@ $recipes = [
 </head>
 <body>
     <?php foreach ($recipes as $recipe):?>
-     <?php 
+     <?php &
         if(array_key_exists('is_enabled', $recipe) && $recipe['is_enabled']==true)
         :?>
         <article>
