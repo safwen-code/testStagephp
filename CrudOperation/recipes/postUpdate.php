@@ -1,4 +1,27 @@
 
+<?php
+include_once './../config/mysql.php';
+$postData = $_POST;
+if (
+    !isset($postData['id']) ||
+    !isset($postData['titel']) ||
+    isset($postData['recipeMenu'])
+) {
+    echo "remplie ts les champ s'il vs plait";
+}
+$id = $postData['id'];
+$titel = $postData['titel'];
+$recipeMenu = $postData['recipeMenu'];
+
+$updateRecipe = $mysqlClient->prepare(
+    'UPDATE recipes SET titel = :titel, recipeMenu = :recipeMenu WHERE recipe_id = :id'
+);
+$updateRecipe->execute([
+    'titel' => $titel,
+    'recipeMenu' => $recipeMenu,
+    'id' => $id,
+]);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -21,8 +44,8 @@
         <div class="card">
             
             <div class="card-body">
-                <h5 class="card-title"><?php echo 'titel'; ?></h5>
-                <p class="card-text"><b>Recette</b> : <?php echo 'recipeMenu'; ?></p>
+                <h5 class="card-title"><?php echo $titel; ?></h5>
+                <p class="card-text"><b>Recette</b> : <?php echo $recipeMenu; ?></p>
             </div>
         </div>
     </div>
