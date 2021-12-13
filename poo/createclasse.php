@@ -39,5 +39,48 @@
      $Surface = $point->getSurface();
      var_dump($Surface);
      ?> 
+<!-- create des multi instance du class point -->
+     <?php 
+       class Point{
+           public float $longeur;
+           public float $Largeur;
+           public function surface():float{
+               return $this->longeur * $this->Largeur;    
+           }
+       }
+        $point1 = new Point;
+        $point1->longeur =5 ;
+        $point1->Largeur =5.25;
+        $surface1 = $point1->surface();
+        var_dump($surface1);
+
+     ?>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
