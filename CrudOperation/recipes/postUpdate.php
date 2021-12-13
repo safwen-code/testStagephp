@@ -1,26 +1,36 @@
-
 <?php
+session_start();
+
 include_once './../config/mysql.php';
+
 $postData = $_POST;
+
 if (
     !isset($postData['id']) ||
     !isset($postData['titel']) ||
-    isset($postData['recipeMenu'])
+    !isset($postData['recipeMenu'])
 ) {
-    echo "remplie ts les champ s'il vs plait";
+    echo 'Il manque des informations pour permettre l\'édition du formulaire.';
 }
+
 $id = $postData['id'];
 $titel = $postData['titel'];
 $recipeMenu = $postData['recipeMenu'];
 
-$updateRecipe = $mysqlClient->prepare(
+$insertRecipeStatement = $mysqlClient->prepare(
     'UPDATE recipes SET titel = :titel, recipeMenu = :recipeMenu WHERE recipe_id = :id'
 );
-$updateRecipe->execute([
+if ($insertRecipeStatement) {
+    echo 'hi ';
+} else {
+    echo 'hello not working';
+}
+$insertRecipeStatement->execute([
     'titel' => $titel,
     'recipeMenu' => $recipeMenu,
     'id' => $id,
 ]);
+$recipe = $insertRecipeStatement->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -38,17 +48,19 @@ $updateRecipe->execute([
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once $rootPath . './../layout/header.php'; ?>
+    <?php include_once $rootPath . '/header.php'; ?>
         <h1>Recette modifiée avec succès !</h1>
         
         <div class="card">
             
             <div class="card-body">
                 <h5 class="card-title"><?php echo $titel; ?></h5>
-                <p class="card-text"><b>Recette</b> : <?php echo $recipeMenu; ?></p>
+                <p class="card-text"><b>Recette</b> : <?php echo strip_tags(
+                    $recipeMenu
+                ); ?></p>
             </div>
         </div>
     </div>
-    <?php include_once $rootPath . './../layout/footer.php'; ?>
+    <?php include_once $rootPath . '/footer.php'; ?>
 </body>
 </html>

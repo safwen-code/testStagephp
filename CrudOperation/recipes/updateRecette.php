@@ -1,15 +1,16 @@
 <?php session_start();
-    include_once('./../config/mysql.php');
+include_once './../config/mysql.php';
 
 $getData = $_GET;
 
-if (!isset($getData['id']) && is_numeric($getData['id']))
-{
-	echo('Il faut un identifiant de recette pour le modifier.');
+if (!isset($getData['id']) && is_numeric($getData['id'])) {
+    echo 'Il faut un identifiant de recette pour le modifier.';
     return;
-}	
+}
 
-$retrieveRecipeStatement = $mysqlClient->prepare('SELECT * FROM recipes WHERE recipe_id = :id');
+$retrieveRecipeStatement = $mysqlClient->prepare(
+    'SELECT * FROM recipes WHERE recipe_id = :id'
+);
 $retrieveRecipeStatement->execute([
     'id' => $getData['id'],
 ]);
@@ -32,21 +33,25 @@ $recipe = $retrieveRecipeStatement->fetch(PDO::FETCH_ASSOC);
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once($rootPath.'/header.php'); ?>
-        <h1>Mettre à jour <?php echo($recipe['titel']); ?></h1>
-        <form action="<?php echo($rootUrl . 'postUpdate.php'); ?>" method="POST">
+    <?php include_once $rootPath . './../layout/header.php'; ?>
+        <h1>Mettre à jour <?php echo $recipe['titel']; ?></h1>
+        <form action="<?php echo $rootUrl . 'postUpdate.php'; ?>" method="POST">
             <div class="mb-3 visually-hidden">
                 <label for="id" class="form-label">Identifiant de la recette</label>
-                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo($getData['id']); ?>">
+                <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $getData[
+                    'id'
+                ]; ?>">
             </div>
             <div class="mb-3">
                 <label for="title" class="form-label">Titre de la recette</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo($recipe['titel']); ?>">
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="title-help" value="<?php echo $recipe[
+                    'titel'
+                ]; ?>">
                 <div id="title-help" class="form-text">Choisissez un titre percutant !</div>
             </div>
             <div class="mb-3">
                 <label for="recipe" class="form-label">Description de la recette</label>
-                <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="recipe" name="recipe">
+                <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="recipe" name="recipeMenu">
                 <?php echo strip_tags($recipe['recipeMenu']); ?>
                 </textarea>
             </div>
@@ -55,6 +60,6 @@ $recipe = $retrieveRecipeStatement->fetch(PDO::FETCH_ASSOC);
         <br />
     </div>
 
-    <?php include_once($rootPath.'/footer.php'); ?>
+    <?php include_once $rootPath . './../layout/footer.php'; ?>
 </body>
 </html>
