@@ -1,7 +1,5 @@
 <?php session_start();
 include_once './../config/mysql.php';
-include_once './../config/users.php';
-include_once 'variables.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,9 +16,7 @@ include_once 'variables.php';
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once $rootPath . '/header.php'; ?>
-
-
+    <?php include_once $rootPath . './../layout/header.php'; ?>
         <h1>Ajouter une recette</h1>
         <form action="<?php echo $rootUrl .
             'post_create.php'; ?>" method="POST">
@@ -30,13 +26,16 @@ include_once 'variables.php';
                 <div id="title-help" class="form-text">Choisissez un titre percutant !</div>
             </div>
             <div class="mb-3">
+                <label for="title" class="form-label">autheur de la recette</label>
+                <input type="text" class="form-control" id="author" name="author" aria-describedby="title-help">
+                <div id="title-help" class="form-text">Choisissez un titre percutant !</div>
+            </div>
+            <div class="mb-3">
                 <label for="recipe" class="form-label">Description de la recette</label>
-                <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="recipe" name="recipe"></textarea>
+                <textarea class="form-control" placeholder="Seulement du contenu vous appartenant ou libre de droits." id="recipe" name="recipeMenu"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
-
-        
         <br />
     </div>
 
