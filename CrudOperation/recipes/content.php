@@ -1,4 +1,3 @@
-
 <?php
 include_once './../config/mysql.php';
 // Si tout va bien, on peut continuer
@@ -10,50 +9,48 @@ $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
 ?>
 <!DOCTYPE html>
-<html lang = 'en'>
+<html>
 <head>
-<meta charset = 'UTF-8'>
-<meta http-equiv = 'X-UA-Compatible' content = 'IE=edge'>
-<meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
-<title>Document</title>
-<link href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css' rel = 'stylesheet' integrity = 'sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC' crossorigin = 'anonymous'>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Recettes - Page d'accueil</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
 </head>
-<body>
-<?php include_once './../layout/header.php'; ?>
-<?php include_once '../function.php'; ?>
-<?php include_once 'login.php'; ?>
-<div class = 'container mt-3'  >
-   <?php foreach ($recipes as $recipe): ?>
-    <div class="d-flex flex-row ">
-      <div class = 'card mb-3' style = 'width: 18rem;'>
-        <div class = 'card-body'>
-          <h5 class = 'card-title'>
-          <a alt="detail recipe" href="recipeDetail.php/?id=<?php echo $recipe[
-              'recipe_id'
-          ]; ?>">
-          <?php echo $recipe['titel']; ?>
-          </a>
-          </h5>
-          <h5 class="card-titel">
-               <?php echo $recipe['author']; ?>
-          </h5> 
-          <p class = 'card-text'><?php echo $recipe['recipeMenu']; ?></p>
-         <div class="d-flex flex-direction-row">
-         <button class="btn btn-danger h-25"><a alt="updateRecette" href="updateRecette.php/?id=<?php echo $recipe[
-             'recipe_id'
-         ]; ?>">detail recette</a></button>
-          <button class="btn btn-secondary">update recette</button>
-         </div>
-          
-        </div>
-      </div>
-    </div>  
-   <?php endforeach; ?>
-  
-</div>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container">
 
-<?php include_once './../layout/footer.php'; ?>
+    <!-- Navigation -->
+    <?php include_once './../layout/header.php'; ?>
 
+        <h1>Site de Recettes !</h1>
+
+        <!-- Plus facile à lire -->
+        <?php foreach ($recipes as $recipe): ?>
+            <article>
+                <h3><a href="./recipeDetail.php?id=<?php echo $recipe[
+                    'recipe_id'
+                ]; ?>"><?php echo $recipe['titel']; ?></a></h3>
+                <div><?php echo $recipe['recipeMenu']; ?></div>
+                
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item"><a class="link-warning" href="./updateRecette.php?id=<?php echo $recipe[
+                            'recipe_id'
+                        ]; ?>">Editer l'article</a></li>
+                        <li class="list-group-item"><a class="link-danger" href="./delete.php?id=<?php echo $recipe[
+                            'recipe_id'
+                        ]; ?>">Supprimer l'article</a></li>
+                        
+                    </ul>
+                
+            </article>
+            
+        <?php endforeach; ?>
+    </div>
+
+    <?php include_once './../layout/footer.php'; ?>
 </body>
 </html>

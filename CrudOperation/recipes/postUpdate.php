@@ -1,33 +1,4 @@
-<?php
-session_start();
 
-include_once './../config/mysql.php';
-
-$postData = $_POST;
-
-if (
-    !isset($postData['id']) ||
-    !isset($postData['titel']) ||
-    !isset($postData['recipeMenu'])
-) {
-    echo 'Il manque des informations pour permettre l\'édition du formulaire.';
-    return;
-}
-
-$id = $postData['id'];
-$title = $postData['titel'];
-$recipe = $postData['recipeMenu'];
-
-$insertRecipeStatement = $mysqlClient->prepare(
-    'UPDATE recipes SET titel = :titel, recipeMenu = :recipeMenu WHERE recipe_id = :id'
-);
-echo "update successfully"
-$insertRecipeStatement->execute([
-    'titel' => $title,
-    'recipeMenu' => $recipe,
-    'id' => $id,
-]);
-?>
 
 <!DOCTYPE html>
 <html>
@@ -44,19 +15,17 @@ $insertRecipeStatement->execute([
 <body class="d-flex flex-column min-vh-100">
     <div class="container">
 
-    <?php include_once $rootPath . '/header.php'; ?>
+    <?php include_once $rootPath . './../layout/header.php'; ?>
         <h1>Recette modifiée avec succès !</h1>
         
         <div class="card">
             
             <div class="card-body">
-                <h5 class="card-title"><?php echo $title; ?></h5>
-                <p class="card-text"><b>Recette</b> : <?php echo strip_tags(
-                    $recipe
-                ); ?></p>
+                <h5 class="card-title"><?php echo 'titel'; ?></h5>
+                <p class="card-text"><b>Recette</b> : <?php echo 'recipeMenu'; ?></p>
             </div>
         </div>
     </div>
-    <?php include_once $rootPath . '/footer.php'; ?>
+    <?php include_once $rootPath . './../layout/footer.php'; ?>
 </body>
 </html>
